@@ -4,7 +4,6 @@ namespace App\Repositories\User;
 
 /**
  * Interface UserRepository
- * @package Modules\User\Repositories
  */
 interface UserRepository
 {

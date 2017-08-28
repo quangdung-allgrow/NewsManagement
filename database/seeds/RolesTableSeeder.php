@@ -31,7 +31,7 @@ class RolesTableSeeder extends Seeder
         $role = Sentinel::findRoleBySlug('admin');
         $role->permissions = [
             'dashboard.index' => true,
-            /* New */
+            /* News */
             'news.index' => true,
             'news.create' => true,
             'news.store' => true,
@@ -39,6 +39,14 @@ class RolesTableSeeder extends Seeder
             'news.update' => true,
             'news.destroy' => true,
             'news.show' => true,
+            /* News Categories*/
+            'newsCategories.index' => true,
+            'newsCategories.create' => true,
+            'newsCategories.store' => true,
+            'newsCategories.edit' => true,
+            'newsCategories.update' => true,
+            'newsCategories.destroy' => true,
+            'newsCategories.show' => true,
         ];
         $role->save();
 

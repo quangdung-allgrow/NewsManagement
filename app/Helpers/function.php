@@ -5,3 +5,7 @@ if (!function_exists('has_error')) {
 		return $errors->has($field) ? 'has-error' : '';
 	}
 }
+
+function active_menu($routeName) {
+	return Route::currentRouteName() == $routeName ? 'active' : '';
+}

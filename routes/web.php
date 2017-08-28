@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('/', ['as' => 'home', 'uses' => 'Web\HomeController@index']);
 
 Route::prefix(config('web.admin-prefix'))->group( function() {
 	Route::prefix('auth')->group( function() {

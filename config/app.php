@@ -172,6 +172,7 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
+        App\Providers\BindingServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
@@ -183,6 +184,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         App\Providers\HelperServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
     ],
 
     /*

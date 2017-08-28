@@ -26,8 +26,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191); // set length limit string
 
         $this->registerMiddleware(); // register middleware
-
-        $this->registerBindings(); // binding class implement interface
     }
 
     /**
@@ -48,13 +46,4 @@ class AppServiceProvider extends ServiceProvider
             $this->app['router']->aliasMiddleware($name, $class);
         }
     }
-
-    private function registerBindings() 
-    {
-        $this->app->bind(
-                'App\\Repositories\\Auth\\Authentication',
-                'App\\Repositories\\Auth\\SentinelAuthentication'
-            );
-    }
-
 }

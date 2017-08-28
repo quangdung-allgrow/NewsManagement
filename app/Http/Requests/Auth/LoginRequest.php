@@ -22,10 +22,10 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => __('auth.validates.required', ['field' => 'email']),
-            'email.email' => __('auth.validates.email'),
-            'password.required' => __('auth.validates.required', ['field' => 'password']),
-            'password.min' => __('auth.validates.min', ['field' => 'password', 'min' => 5]),
+            'email.required' => __('validation.required', ['attribute' => 'Email']),
+            'email.email' => __('validation.email', ['attribute' => 'Email']),
+            'password.required' => __('validation.required', ['attribute' => 'Password']),
+            'password.min' => __('validation.min.string', ['attribute' => 'Password', 'min' => 5]),
         ];
     }
 
