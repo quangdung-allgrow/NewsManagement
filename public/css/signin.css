@@ -1,0 +1,13 @@
+.center-auto {
+	margin: 0 auto;
+}
+.mar-top-50 {
+	margin-top: 50px
+}
+
+.width-100 {
+	width: 100px !important;
+}
+.pointer{
+	cursor: pointer;
+}
