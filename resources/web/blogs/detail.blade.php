@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', $news->title)
+
 @section('content')
 <div class="col-xs-12 col-sm-9">
   <div class="blog-post">

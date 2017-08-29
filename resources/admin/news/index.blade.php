@@ -21,13 +21,6 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>
-                        @if(count($news) > 0)
-                        <div class="form-group">
-                            <input type="checkbox" onchange="check_del_all(this)" id="checke-all">
-                        </div>
-                        @endif
-                    </th>
                     <th class="center">ID</th>
                     <th class="center">Title</th>
                     <th class="center">Category</th>
@@ -86,5 +79,13 @@
             }
         });
     };
+    $(document).ready(function() {
+        $('#checke-all').click(function() {
+            $('#row_del').each(function(i, obj) {
+                console.log('ss');
+                //$(this).prop( "checked" );
+            });
+        });
+    });
 </script>
 @stop

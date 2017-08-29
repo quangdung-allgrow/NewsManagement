@@ -1,11 +1,4 @@
 <tr>
-    <td>
-        <div class="form-group">
-            <label>
-                <input type="checkbox" class="minimal" name="row_del" data-id="{{ $item->id }}">
-            </label>
-        </div>
-    </td>
     <td class="center">{{ $item->id }}</td>
     <td class="center" style="width: 20%">{{ $item->title }}</td>
     <td class="center" style="width: 10%">{{ $item->ca_title }}</td>

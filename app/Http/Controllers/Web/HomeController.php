@@ -29,6 +29,10 @@ class HomeController extends Controller
                 'title_slug' => $title_slug
             ]);
         
+        if (empty($news)) {
+            return view('errors.404');
+        }
+        
         $newsCategories = $this->newsCategories->all();
 
     	return view('blogs.detail', compact('news', 'newsCategories'));

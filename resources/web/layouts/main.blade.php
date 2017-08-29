@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>News Managements</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
