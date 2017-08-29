@@ -29,6 +29,10 @@ class News extends Model
         'deleted_at'
     ];
 
+    public function scopeLock($query, $lock) {
+    	return $query->where('lock',$lock);
+    }
+
     public function newsCategories(){
 		return $this->belongsTo('App\Entities\NewsCategories', 'news_cate_id');
 	}

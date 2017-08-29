@@ -153,6 +153,5 @@ abstract class EloquentBaseRepository implements BaseRepository
 
         return $query;
     }
-
     
 }

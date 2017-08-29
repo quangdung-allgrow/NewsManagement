@@ -29,7 +29,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = $this->news->paginate(10);
+        $news = $this->news->paginate(10, 'news.created_at');
 
         return view('news.index', compact('news'));
     }
@@ -55,9 +55,19 @@ class NewsController extends Controller
     public function store(AddNewsRequest $request)
     {
         $data = $request->all();
+
+        $this->news->reformatData($data);
+
         $data['user_id'] = $this->auth->check()->id;
 
         $create = $this->news->create($data);
+
+        if ( !$create ) {
+            flash('danger', __('app.messages.save item failed') );
+            return redirect()->back();
+        }
+
+        flash('success', __('app.messages.save item success') );
 
         if ($request->submit == 'save_continue') {
            return redirect()->back();
@@ -103,9 +113,19 @@ class NewsController extends Controller
         $model = $this->news->find($id);
 
         $data = $request->all();
+
+        $this->news->reformatData($data);
+        
         $data['user_id'] = $this->auth->check()->id;
 
-        $this->news->update($model, $data);
+        $update = $this->news->update($model, $data);
+
+        if ( !$update ) {
+            flash('danger', __('app.messages.save item failed') );
+            return redirect()->back();
+        }
+
+        flash('success', __('app.messages.save item success') );
 
         return redirect()->route('news.index');
     }

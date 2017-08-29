@@ -1,8 +1,9 @@
+@if( !empty(session('message')) )
 <script type="text/javascript">
     $(function() {
         setTimeout(function() {
-            $.bootstrapGrowl("{{ Sesstion::get('message', '') }}", {
-                type: 'danger',
+            $.bootstrapGrowl("{{ session()->pull('message') }}", {
+                type: '{{ session()->pull('type') }}',
                 align: 'right',
                 width: 'auto',
                 allow_dismiss: true,
@@ -11,3 +12,4 @@
         }, 200);
     });
 </script>
+@endif

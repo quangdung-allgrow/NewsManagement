@@ -30,3 +30,20 @@ if ( !function_exists('checked') ) {
         return $param1 != $check ? : 'checked';
     }
 }
+
+if ( !function_exists('flash') ) {
+    function flash($type, $message) {
+        return session(['type' => $type, 'message' => $message]);
+    }
+}
+
+if ( !function_exists('truncate') ) {
+    function truncate($string, $number_char) {
+        $string = html_entity_decode(strip_tags($string));
+        if(strlen($string) <= $number_char) {
+            return $string;
+        }
+        $str_wrap = wordwrap($string, $number_char, "::");
+        return substr($string, 0, strpos($str_wrap, '::')). '...';
+    }
+}

@@ -14,7 +14,7 @@ class AddNewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:10|max:500:unique:news,title',
+            'title' => 'required|min:10|max:500|unique:news,title',
             'content' => 'required|min:100|max:10000'
         ];
     }

@@ -5,14 +5,18 @@
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'Web\HomeController@index']);
+Route::get('/', ['as' => 'news', 'uses' => 'Web\HomeController@index']);
 
+Route::prefix('news')->group( function() {
+	Route::get('/{title_slug}', ['as' => 'news.detail', 'uses' => 'Web\HomeController@newsDetail']);
+	Route::get('/cate/{title_slug}', ['as' => 'newsCategories.showCate', 'uses' => 'Web\HomeController@showCate']);
+
+});
+
+
+// admin auth
 Route::prefix(config('web.admin-prefix'))->group( function() {
 	Route::prefix('auth')->group( function() {
 	    # Login

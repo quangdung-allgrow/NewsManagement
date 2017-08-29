@@ -47,3 +47,44 @@
     </div>
 </div>
 @stop
+
+@section('script')
+<script type="text/javascript">
+    function confirmDel(el) {
+        vex.dialog.confirm({
+            message: '{{ __('app.string.aya sure') }}',
+            callback: function (confirm) {
+                if (confirm) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    });
+                    $.ajax({
+                        url: '{{ route('news.delete') }}',
+                        data: { 
+                            id : $(el).data('id')
+                        },
+                        cache: false,
+                        type: 'POST',
+                        beforeSend: function(xhr) {
+                            $.addLoadingBottom();
+                            $('.ajax-loading').show();
+                        },
+                        success: function(resp) {
+                            if (resp.code == 200) {
+                                location.reload();
+                            } else {
+                                vex.dialog.alert({ unsafeMessage: resp.message });
+                            }
+                        },
+                        complete: function() {
+                            $('.ajax-loading').hide();
+                        }
+                    });
+                }
+            }
+        });
+    };
+</script>
+@stop

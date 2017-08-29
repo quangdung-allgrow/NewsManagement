@@ -1,3 +1,4 @@
+@if( count($errors->all()) > 0)
 <script type="text/javascript">
     $(function() {
         @php($delay=200)
@@ -15,3 +16,4 @@
         @endforeach
     });
 </script>
+@endif

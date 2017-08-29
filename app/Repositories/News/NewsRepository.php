@@ -6,5 +6,5 @@ use App\Repositories\BaseRepository;
 
 interface NewsRepository extends BaseRepository
 {
-
+	public function reformatData(array &$attributes);
 }

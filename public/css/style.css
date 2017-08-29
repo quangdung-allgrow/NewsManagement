@@ -10,6 +10,14 @@ body {
 footer {
     padding: 30px 0;
 }
+.title-wrap {
+    height: 100px;
+    overflow-y: hidden;
+}
+
+.content-wrap {
+    
+}
 
 @media screen and (max-width: 767px) {
     .row-offcanvas {
