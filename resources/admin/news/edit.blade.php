@@ -1,4 +1,4 @@
-@extends('layouts.master') 
+@extends('layouts.master')
 
 @section('title', 'Edit News')
 
@@ -6,14 +6,14 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
-            <div class="pull-left"> 
+            <div class="pull-left">
                 <h2 class="page-header">Edit News</h2>
             </div>
             <div class="pull-right" style="margin: 0 15px 15px 0;">
                 <ol class="breadcrumb">
                     <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li><a href="{{ route('news.index') }}"><i class="fa fa-dashboard"></i> News</a></li>
-                    <li class="active">Edit</li> 
+                    <li class="active">Edit</li>
                 </ol>
             </div>
         </div>
@@ -66,8 +66,5 @@
 @stop
 
 @section('script')
-{{-- <script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
-<script src="{{ asset('plugins/tinymce/jquery.tinymce.min.js') }}"></script>
-<script src="{{ asset('app/js/tinymce.init.js') }}"></script> --}}
-
+<script src="{{ asset('app/js/tinymce.init.js') }}"></script>
 @stop

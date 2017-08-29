@@ -15,7 +15,7 @@
     {{-- vex --}}
     <link href="{{ asset('plugins/vex/css/vex.css') }}" rel="stylesheet" />
     <link href="{{ asset('plugins/vex/css/vex-theme-os.css') }}" rel="stylesheet" />
-    
+
     <link href="{{ asset('app/css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,6 +23,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
     @yield('style')
 </head>
 
@@ -38,14 +40,12 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/notification-growl/jquery.bootstrap-growl.min.js') }}"></script>
     <script src="{{ asset('plugins/vex/js/vex.combined.min.js') }}"></script>
     <script src="{{ asset('app/js/loading.js') }}"></script>
+    <script src="{{ asset('app/js/helper.js') }}"></script>
     <script>vex.defaultOptions.className = 'vex-theme-os'</script>
     {{-- show error --}}
     @include('partials.error-messages')

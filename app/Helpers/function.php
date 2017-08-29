@@ -7,8 +7,17 @@ if (!function_exists('has_error')) {
 }
 
 if ( !function_exists('active_menu') ) {
-	function active_menu($routeName) {
-		return Route::currentRouteName() == $routeName ? 'active' : '';
+	function active_menu($link) {
+        if (strpos($link, '.') !== false) {
+            return Route::currentRouteName() == $link ? 'active' : '';
+        }
+
+        $pattern = str_replace('/*', '\/?.*', $link);
+
+        if ( preg_match("/$pattern/", Request::url()) ) {
+            return 'active';
+        }
+        return '';
 	}
 }
 

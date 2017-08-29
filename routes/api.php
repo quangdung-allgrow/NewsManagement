@@ -17,4 +17,10 @@ Route::prefix('news')->group( function ( $router ) {
         'middleware' => 'can:news.delete',
     ]);
 
+    Route::post('deleteMulti', [
+        'as' => 'news.deleteMulti',
+        'uses' => 'NewsController@deleteMulti',
+        'middleware' => 'can:news.deleteMulti',
+    ]);
+
 });

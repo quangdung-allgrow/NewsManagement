@@ -40,6 +40,7 @@ class RolesTableSeeder extends Seeder
             'news.destroy' => true,
             'news.show' => true,
             'news.delete' => true,
+            'news.deleteMulti' => true,
             /* News Categories*/
             'newsCategories.index' => true,
             'newsCategories.create' => true,

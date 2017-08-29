@@ -38,4 +38,25 @@ class NewsController extends Controller
                 'data' => null
             ]);
     }
+
+    public function deleteMulti(Request $request) {
+        $ids = json_decode($request->id);
+
+        if (count($ids) > 0) {
+            foreach ($ids as $id) {
+                if ( !$this->news->destroy($id) ) {
+                    return Response::json([
+                            'code' => 401,
+                            'message' => __('app.messages.failed'),
+                            'data' => null
+                        ]);
+                }
+            }
+        }
+        return Response::json([
+                    'code' => 200,
+                    'message' => __('app.messages.success'),
+                    'data' => null
+                ]);
+    }
 }
