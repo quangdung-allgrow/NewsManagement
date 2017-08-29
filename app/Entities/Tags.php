@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Tag\Entities;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Tags extends Model
 {
 	protected $table = 'tags';
 

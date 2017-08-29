@@ -39,6 +39,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/notification-growl/jquery.bootstrap-growl.min.js') }}"></script>
+    {{-- show error --}}
+    @include('partials.error-messages')
+    @include('partials.messages')
     @yield('script')
 </body>
 

@@ -49,6 +49,14 @@ class BindingServiceProvider extends ServiceProvider
                         $app->make('App\Entities\NewsCategories')
                     );
             });
+
+        $this->app->bind(
+                'App\\Repositories\\Tags\\TagsRepository', 
+                function ($app) {
+                    return new \App\Repositories\Tags\EloquentTagsRepository(
+                        $app->make('App\Entities\Tags')
+                    );
+            });
     }
 
 }

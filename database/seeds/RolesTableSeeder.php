@@ -47,6 +47,9 @@ class RolesTableSeeder extends Seeder
             'newsCategories.update' => true,
             'newsCategories.destroy' => true,
             'newsCategories.show' => true,
+
+            /* Tags*/
+            'tags.getTags' => true,
         ];
         $role->save();
 

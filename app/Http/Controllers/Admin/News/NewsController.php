@@ -5,13 +5,21 @@ namespace App\Http\Controllers\Admin\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\News\NewsRepository;
+use App\Repositories\News\NewsCategoriesRepository;
+use App\Http\Requests\News\AddNewsRequest;
+use App\Http\Requests\News\UpdateNewsRequest;
+use App\Repositories\Auth\Authentication;
+use Session;
 
 class NewsController extends Controller
 {
     private $news;
+    private $newsCategories;
 
-    public function __construct(NewsRepository $news) {
+    public function __construct(NewsRepository $news, NewsCategoriesRepository $newsCategories, Authentication $auth) {
         $this->news = $news;
+        $this->newsCategories = $newsCategories;
+        $this->auth = $auth;
     }
 
     /**
@@ -33,7 +41,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $newsCategories = $this->newsCategories->all();
+
+        return view('news.create', compact('newsCategories'));
     }
 
     /**
@@ -42,9 +52,18 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddNewsRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = $this->auth->check()->id;
+
+        $create = $this->news->create($data);
+
+        if ($request->submit == 'save_continue') {
+           return redirect()->back();
+        }
+
+        return redirect()->route('news.index');
     }
 
     /**
@@ -66,7 +85,10 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $news = $this->news->find($id);
+        $newsCategories = $this->newsCategories->all();
+
+        return view('news.edit', compact('news', 'newsCategories'));
     }
 
     /**
@@ -76,9 +98,16 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateNewsRequest $request, $id)
     {
-        //
+        $model = $this->news->find($id);
+
+        $data = $request->all();
+        $data['user_id'] = $this->auth->check()->id;
+
+        $this->news->update($model, $data);
+
+        return redirect()->route('news.index');
     }
 
     /**

@@ -1,3 +1,29 @@
 .blue {
 	color: #428bca;
 }
+
+.glyphicon {
+	margin-right: 5px;
+}
+
+.red {
+	color: red;
+}
+
+.box-textarea {
+	position: relative;
+}
+
+.count_char {
+	position: absolute;
+	right: 0;
+	top: -20px;
+}
+
+.none {
+	display: none;
+}
+
+.clearfix {
+	clear: both;
+}

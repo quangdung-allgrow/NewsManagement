@@ -108,4 +108,12 @@ Route::prefix(config('web.admin-prefix'))->group( function() {
 	    });
     });
 
+    // get Tag News
+    Route::get('tags', [
+        'as' => 'tags.getTags',
+        'uses' => 'Tags\TagsController@getTags',
+        'middleware' => 'can:tags.getTags',
+    ]);
+
 });
+
