@@ -1,5 +1,14 @@
 <?php
 
+if (!function_exists('contain')) {
+    function contain($str, $need) {
+        if (strpos($str, $need) !== false ) {
+            return true;
+        }
+        return false;
+    }
+}
+
 if (!function_exists('has_error')) {
 	function has_error($errors, $field) {
 		return $errors->has($field) ? 'has-error' : '';

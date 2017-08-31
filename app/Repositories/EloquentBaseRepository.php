@@ -5,8 +5,10 @@ namespace App\Repositories;
 use App\Repositories\BaseRepository;
 use App\Repositories\Auth\Authentication;
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\ProcedureRepository;
+use DB;
 
-abstract class EloquentBaseRepository implements BaseRepository
+abstract class EloquentBaseRepository implements BaseRepository, ProcedureRepository
 {
 
     protected $model;
@@ -153,5 +155,106 @@ abstract class EloquentBaseRepository implements BaseRepository
 
         return $query;
     }
+
+    // STORE PROCEDURE
+
+    public function procedureQuery($query) {
+        $proc = $this->procedureBuildStatement(1, 'dynamic_query');
+        return DB::select($proc, [$query]);
+    }
+
+    public function procedureFind($id) {
+        $proc = $this->procedureBuildStatement(1, 'dynamic_query');
+        $query = "select * from " . $this->model->getTable() . " where id=$id";
+        $records = DB::select($proc, [$query]);
+        if (count($records) == 1) {
+            return $records[0];
+        }
+        return null;
+    }
     
+    public function procedureAll() {
+        $proc = $this->procedureBuildStatement(1, 'dynamic_query');
+        $query = "select * from " . $this->model->getTable();
+        return DB::select($proc, [$query]);
+    }
+
+    public function procedurePaginate($limit, $orderBy = 'id', $sortOrder = 'DESC') {
+        $proc = $this->procedureBuildStatement(1, 'dynamic_query');
+        $table = $this->model->getTable();
+
+        $from = isset($_GET['page']) ? ($_GET['page'] - 1) * $limit : 0;
+
+        $query = "select * from $table order by $orderBy $sortOrder limit $from, $limit";
+        return DB::select($proc, [$query]);
+    }
+
+    public function procedureCreate($data) {
+         // $table = $this->model->getTable();
+         // $attributes = $this->model->getFillable();
+         // $proc = $this->procedureBuildStatement(count($attributes), $table."_insert");
+
+         // $values = [];
+
+         // foreach ($attributes as $field) {
+         //     $values[$field] = isset($data[$field]) ? $data[$field] : 'null';
+         // }
+
+         // DB::select($proc, $values);
+    }
+
+    public function procedureFindByAttributes(array $attributes, array $conditionLink) {
+        $table = $this->model->getTable();
+        $sql = "select * from $table where ";
+
+        $where = '';
+        $i=0;
+        foreach ($attributes as $key => $value) {
+            $cond = '=';
+            if ( strpos($key, ':') != false ) {
+                $conds = explode(':', $key);
+                $cond = $conds[1];     
+            }
+
+            $val = $value;
+            if ( !is_numeric($value) ) {
+                $value = str_replace("'", '"', $value);
+                $val = "'$value'";
+            }
+
+            $link = '';
+            if ($i < count($attributes) - 1) {
+                $link = $conditionLink[$i++];
+            }
+            
+            $where .= " `$key` $cond $val $link";
+        }
+
+        $sql .= $where;
+
+        $proc = $this->procedureBuildStatement(1, 'dynamic_query');
+
+        $records = DB::select($proc, [$sql]);
+
+        if (count($records) == 1) {
+            return $records[0];
+        }
+        return $records;
+    }
+
+    public function procedureBuildStatement($numberAtts, $functionName) {
+        $proc = "CALL $functionName";
+
+        $where = '';
+        for ($i=0; $i < $numberAtts; $i++) { 
+            $where .= '?,';
+            if ($i == $numberAtts - 1) {
+                $where = rtrim($where, ',');
+            }
+        }
+
+        $proc .= "($where);";
+
+        return $proc;
+    }
 }

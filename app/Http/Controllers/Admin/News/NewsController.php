@@ -95,7 +95,10 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        $news = $this->news->find($id);
+        //$news = $this->news->find($id);
+
+        $news = $this->news->procedureFind($id);
+
         $newsCategories = $this->newsCategories->all();
 
         return view('news.edit', compact('news', 'newsCategories'));

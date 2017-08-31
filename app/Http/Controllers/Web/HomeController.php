@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\News\NewsRepository;
 use App\Repositories\News\NewsCategoriesRepository;
+use DB;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,11 @@ class HomeController extends Controller
     	$news = $this->news->findByAttributes([
                 'title_slug' => $title_slug
             ]);
-        
+        // $news = $this->news->procedureFindByAttributes([
+        //         'title_slug' => $title_slug,
+        //         'lock' => 0
+        //     ], ['and']);
+
         if (empty($news)) {
             return view('errors.404');
         }
