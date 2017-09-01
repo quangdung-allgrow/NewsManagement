@@ -1,4 +1,12 @@
-Options +FollowSymLinks
-RewriteEngine On
-RewriteBase /
-RewriteRule (.*) http://google.com/$1 [R=301,L]
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirect All Requests To The Subfolder
+    #RewriteRule ^ public
+    #RewriteRule ^(.*)/$ public/$1 [L,R=301]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
