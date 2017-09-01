@@ -13,17 +13,18 @@ class ProcedureDynamicQuery extends Migration
      */
     public function up()
     {
-        $proc = "
-            DELIMITER $$
-            DROP PROCEDURE  `dynamic_query` $$
-            CREATE DEFINER =  `root`@`localhost` PROCEDURE  `dynamic_query` ( IN  `query` VARCHAR( 255 ) ) 
-            BEGIN 
-                SET @s = query;
-                PREPARE stmt FROM @s ;
-                EXECUTE stmt;
-                DEALLOCATE PREPARE stmt;
-            END";
-        DB::statement();
+        $databaseName = env('DB_DATABASE','');
+
+        $proc = "use $databaseName;
+                DROP PROCEDURE IF EXISTS dynamic_query;
+                CREATE DEFINER = `root`@`localhost` PROCEDURE dynamic_query ( IN  query VARCHAR(255) )
+                BEGIN
+                    SET @s = query;
+                    PREPARE stmt FROM @s;
+                    EXECUTE stmt;
+                    DEALLOCATE PREPARE stmt;
+                END";
+        DB::unprepared($proc);
     }
 
     /**
@@ -33,6 +34,10 @@ class ProcedureDynamicQuery extends Migration
      */
     public function down()
     {
-        //
+        $databaseName = env('DB_DATABASE','');
+        $proc = "
+            use $databaseName;
+            DROP PROCEDURE IF EXISTS dynamic_query;";
+        DB::unprepared($proc);
     }
 }
