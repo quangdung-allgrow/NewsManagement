@@ -29,10 +29,6 @@ class HomeController extends Controller
     	$news = $this->news->findByAttributes([
                 'title_slug' => $title_slug
             ]);
-        // $news = $this->news->procedureFindByAttributes([
-        //         'title_slug' => $title_slug,
-        //         'lock' => 0
-        //     ], ['and']);
 
         if (empty($news)) {
             return view('errors.404');

@@ -9,7 +9,9 @@
 
 Route::get('/', ['as' => 'news', 'uses' => 'Web\HomeController@index']);
 
-Route::prefix('news')->group( function() {
+Route::prefix('news')
+	->middleware('cache.page')
+	->group( function() {
 	Route::get('/{title_slug}', ['as' => 'news.detail', 'uses' => 'Web\HomeController@newsDetail']);
 	Route::get('/cate/{title_slug}', ['as' => 'newsCategories.showCate', 'uses' => 'Web\HomeController@showCate']);
 
@@ -38,3 +40,5 @@ Route::prefix(config('web.admin-prefix'))->group( function() {
         ]);
 	});
 });
+
+Route::get('/not_found', ['as' => 'errors.404', 'uses' => 'Web\ErrorsController@notFound']);

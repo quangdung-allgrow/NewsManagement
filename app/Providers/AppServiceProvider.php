@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
         'admin.auth' => 'Admin\\AdminMiddleware',          // redirect to login page if user not login
         'logged.in'  => 'Admin\\Auth\\LoggedInMiddleware', // redirect to dashboard if user logded
         'can'        => 'Admin\\CanAccessMiddleware',      // check user permission
+        'cache.page'        => 'CachePage',      // cache page
     ];
 
     /**

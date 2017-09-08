@@ -95,9 +95,7 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //$news = $this->news->find($id);
-
-        $news = $this->news->procedureFind($id);
+        $news = $this->news->find($id);
 
         $newsCategories = $this->newsCategories->all();
 
