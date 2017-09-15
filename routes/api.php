@@ -11,6 +11,12 @@
 // user router
 Route::prefix('news')->group( function ( $router ) {
 
+    Route::get('/', [
+        'as' => 'api.news',
+        'uses' => 'NewsController@index',
+        'middleware' => 'can:api.news',
+    ]);
+
     Route::post('delete', [
         'as' => 'news.delete',
         'uses' => 'NewsController@delete',

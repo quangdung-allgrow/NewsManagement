@@ -15,6 +15,12 @@ class NewsController extends Controller
         $this->news = $news;
     }
 
+    public function index(Request $request) {
+        $news = $this->news->paginate($request->citem, 'news.created_at');
+
+        return $news;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

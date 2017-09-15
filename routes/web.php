@@ -42,3 +42,10 @@ Route::prefix(config('web.admin-prefix'))->group( function() {
 });
 
 Route::get('/not_found', ['as' => 'errors.404', 'uses' => 'Web\ErrorsController@notFound']);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

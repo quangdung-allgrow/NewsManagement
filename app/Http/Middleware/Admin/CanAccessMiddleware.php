@@ -31,7 +31,7 @@ class CanAccessMiddleware
         if ($this->auth->hasAccess($routeName) === false) {
             return $this->handleUnauthorizedRequest($request, $routeName);
         }
-
+        
         return $next($request);
     }
 

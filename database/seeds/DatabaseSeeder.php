@@ -4,6 +4,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    protected $seeders = [
+        NewCategoriesSeeder::class,
+        RolesTableSeeder::class,
+        UserTableSeeder::class,
+    ];
+
+    protected $development = [
+        FakeDataSeeder::class,
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -11,7 +21,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    	$this->call(RolesTableSeeder::class);
-    	//$this->call(UserTableSeeder::class);
+    	$this->seed($this->seeders);
+
+        if (collect(['local', 'testing'])->contains(config('app.env'))) {
+            $this->seed($this->development);
+        }
+    }
+
+    private function seed(array $classes) {
+        foreach ($classes as $class) {
+            $this->call($class);
+        }
     }
 }

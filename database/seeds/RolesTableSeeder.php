@@ -50,6 +50,9 @@ class RolesTableSeeder extends Seeder
             'newsCategories.destroy' => true,
             'newsCategories.show' => true,
 
+            /* route in vue*/
+            'api.news' => true,
+
             /* Tags*/
             'tags.getTags' => true,
         ];

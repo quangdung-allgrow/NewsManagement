@@ -4,7 +4,6 @@ namespace App\Entities\Sentinel;
 
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Users\EloquentUser;
-use Modules\User\Entities\UserInterface;
 
 class User extends EloquentUser implements UserInterface
 {
