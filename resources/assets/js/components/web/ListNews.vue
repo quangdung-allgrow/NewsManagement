@@ -1,11 +1,14 @@
 <template>
 	<div>
-		<div class="row">
-	        <div :class="'col-xs-6 col-lg-'+12/col" v-for="(news, index) in list">
-	            <h3><a :href="'/news/'+news.title_slug">{{ news.title }}</a></h3>
-	            <p>{{ truncate(news.content, 200) }}</p>
-	            <p><a class="btn btn-default" href="" role="button">View details &raquo;</a></p>
-	        </div> 
+
+		<div class="row" v-for="(x, index0) in _.range(_round_up(citem/col))">
+	        <div :class="'col-xs-6 col-lg-'+12/col" v-for="(news, index1) in _.range(climit)">
+	        	<div v-if="_.some(list, 'title')">
+		            <h3><a :href="'/news/'+list[index1 + (index0 * col)].title_slug">{{ list[index1 + (index0 * col)].title }}</a></h3>
+		            <p>{{ _truncate(list[index1 + (index0 * col)].content, 200) }}</p>
+		            <p><a class="btn btn-default" href="" role="button">View details &raquo;</a></p>
+	            </div>
+	        </div>
 	    </div>
 		<paginate
 		  :page-count="pageCount"
@@ -15,7 +18,6 @@
 		  :next-text="'»'"
 		  :container-class="'pagination'">
 		</paginate>
-		{{ capitalizeFirstLetter('lower case') }}
 	</div>
 </template>
 
@@ -26,7 +28,9 @@
 		data: function() {
 			return {
 				list: [],
-				pageCount: 0
+				pageCount: 0,
+				show: false,
+				climit: this.col
 			};
 		},
 
@@ -45,17 +49,6 @@
                     	this.pageCount = res.data.last_page;
                         this.list = res.data.data;
                     });
-            },
-
-            truncate(str, length) {
-            	return _.truncate(str, {
-				  'length': length,
-				  'separator': ' '
-				});
-            },
-
-            round(number) {
-            	return _.ceil(number);
             }
         }
 	}

@@ -1,8 +1,16 @@
+// helper module
 
-Vue.mixin({
-  methods: {
-    capitalizeFirstLetter: function(str) {
-    	return str.charAt(0).toUpperCase() + str.slice(1);
+export default {
+    methods: {
+        _truncate(str, length) {
+        	return _.truncate(str, {
+			  'length': length,
+			  'separator': ' '
+			});
+        },
+
+        _round_up(number) {
+        	return _.ceil(number);
+        }
     }
-  }
-})
+}

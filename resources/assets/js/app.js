@@ -1,7 +1,11 @@
 
-require('./bootstrap');
+require('./bootstrap');	
 
-require('./helper');
+import helper from './helper';
+
+Vue.mixin(helper);
+
+Vue.set(Vue.prototype, '_', _);
 
 Vue.component('paginate', require('vuejs-paginate'));
 

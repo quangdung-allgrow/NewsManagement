@@ -1641,6 +1641,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['page', 'col', 'citem'],
@@ -1648,7 +1650,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       list: [],
-      pageCount: 0
+      pageCount: 0,
+      show: false,
+      climit: this.col
     };
   },
 
@@ -1666,15 +1670,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.pageCount = res.data.last_page;
         _this.list = res.data.data;
       });
-    },
-    truncate: function truncate(str, length) {
-      return _.truncate(str, {
-        'length': length,
-        'separator': ' '
-      });
-    },
-    round: function round(number) {
-      return _.ceil(number);
     }
   }
 });
@@ -31740,17 +31735,19 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticClass: "row"
-  }, _vm._l((_vm.list), function(news, index) {
+  return _c('div', [_vm._l((_vm._.range(_vm._round_up(_vm.citem / _vm.col))), function(x, index0) {
     return _c('div', {
-      class: 'col-xs-6 col-lg-' + 12 / _vm.col
-    }, [_c('h3', [_c('a', {
-      attrs: {
-        "href": '/news/' + news.title_slug
-      }
-    }, [_vm._v(_vm._s(news.title))])]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.truncate(news.content, 200)))]), _vm._v(" "), _vm._m(0, true)])
-  })), _vm._v(" "), _c('paginate', {
+      staticClass: "row"
+    }, _vm._l((_vm._.range(_vm.climit)), function(news, index1) {
+      return _c('div', {
+        class: 'col-xs-6 col-lg-' + 12 / _vm.col
+      }, [(_vm._.some(_vm.list, 'title')) ? _c('div', [_c('h3', [_c('a', {
+        attrs: {
+          "href": '/news/' + _vm.list[index1 + (index0 * _vm.col)].title_slug
+        }
+      }, [_vm._v(_vm._s(_vm.list[index1 + (index0 * _vm.col)].title))])]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._truncate(_vm.list[index1 + (index0 * _vm.col)].content, 200)))]), _vm._v(" "), _vm._m(0, true)]) : _vm._e()])
+    }))
+  }), _vm._v(" "), _c('paginate', {
     attrs: {
       "page-count": _vm.pageCount,
       "click-handler": _vm.fetchList,
@@ -31759,7 +31756,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "next-text": '»',
       "container-class": 'pagination'
     }
-  }), _vm._v("\n\t" + _vm._s(_vm.capitalizeFirstLetter('lower case')) + "\n")], 1)
+  })], 2)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_c('a', {
     staticClass: "btn btn-default",
@@ -42048,10 +42045,16 @@ module.exports = function(module) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper__ = __webpack_require__("./resources/assets/js/helper.js");
 
 __webpack_require__("./resources/assets/js/bootstrap.js");
 
-__webpack_require__("./resources/assets/js/helper.js");
+
+
+Vue.mixin(__WEBPACK_IMPORTED_MODULE_0__helper__["a" /* default */]);
+
+Vue.set(Vue.prototype, '_', _);
 
 Vue.component('paginate', __webpack_require__("./node_modules/vuejs-paginate/dist/index.js"));
 
@@ -42156,15 +42159,23 @@ module.exports = Component.exports
 /***/ }),
 
 /***/ "./resources/assets/js/helper.js":
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+// helper module
 
-Vue.mixin({
-  methods: {
-    capitalizeFirstLetter: function capitalizeFirstLetter(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        _truncate: function _truncate(str, length) {
+            return _.truncate(str, {
+                'length': length,
+                'separator': ' '
+            });
+        },
+        _round_up: function _round_up(number) {
+            return _.ceil(number);
+        }
     }
-  }
 });
 
 /***/ }),
